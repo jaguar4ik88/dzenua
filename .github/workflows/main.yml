@@ -31,14 +31,14 @@ jobs:
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.SREMOTE_USER }}
+          username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_KEY }}   # приватный ssh-ключ
           script: |
             cd /var/www/dzenua || mkdir -p /var/www/dzenua && cd /var/www/dzenua
             # первый раз — клонируем, дальше просто pull
             if [ ! -d .git ]; then
               git init
-              git remote add origin git@github.com:ВАШ_АККАУНТ/dzenua.git
+              git remote add origin https://github.com/jaguar4ik88/dzenua.git
               git fetch origin main
               git checkout -t origin/main
             else
