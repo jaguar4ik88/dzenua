@@ -244,7 +244,7 @@ function App() {
       
       <main className="main">
         <section className="hero">
-          <h1>ZenUA</h1>
+          <h1>dzenua</h1>
           <p>Медитативний фінансовий портал</p>
         </section>
         

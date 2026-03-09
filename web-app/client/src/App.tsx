@@ -109,7 +109,7 @@ function App() {
       <div className="app">
         <div className="loading-screen">
           <div className="spinner"></div>
-          <p>Завантаження ZenUA...</p>
+          <p>Завантаження dzenua...</p>
         </div>
       </div>
     );

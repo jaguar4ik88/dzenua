@@ -26,7 +26,7 @@
     "react",
     "typescript"
   ],
-  "author": "ZenUA Team",
+  "author": "dzenua Team",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^8.2.2"

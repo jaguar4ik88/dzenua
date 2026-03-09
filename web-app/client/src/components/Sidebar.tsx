@@ -180,7 +180,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
-        <h2>ZenUA</h2>
+        <h2>dzenua</h2>
         <button className="close-btn" onClick={onClose}>✕</button>
       </div>
       

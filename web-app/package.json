@@ -1,7 +1,7 @@
 {
   "name": "zenua-web-app",
   "version": "1.0.0",
-  "description": "ZenUA - Ukrainian meditation financial portal web application",
+  "description": "dzenua - Ukrainian meditation financial portal web application",
   "main": "server.js",
   "scripts": {
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",

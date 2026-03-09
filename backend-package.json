@@ -1,7 +1,7 @@
 {
   "name": "zenua-backend",
   "version": "1.0.0",
-  "description": "Backend API for ZenUA - Ukrainian meditation financial portal",
+  "description": "Backend API for dzenua - Ukrainian meditation financial portal",
   "main": "dist/index.js",
   "scripts": {
     "dev": "nodemon src/index.ts",
@@ -80,6 +80,6 @@
     "currency",
     "media"
   ],
-  "author": "ZenUA Team",
+  "author": "dzenua Team",
   "license": "MIT"
 }

@@ -79,7 +79,7 @@ function adminAuth(req, res, next) {
 
   const header = req.headers.authorization || '';
   if (!header.startsWith('Basic ')) {
-    res.set('WWW-Authenticate', 'Basic realm="ZenUA Admin"');
+    res.set('WWW-Authenticate', 'Basic realm="dzenua Admin"');
     return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
   const base64 = header.replace('Basic ', '');
@@ -350,7 +350,7 @@ app.post('/api/contact', (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({
     success: true,
-    message: 'ZenUA API is running',
+    message: 'dzenua API is running',
     timestamp: new Date().toISOString(),
     uptime: process.uptime()
   });
@@ -372,7 +372,7 @@ app.use((err, req, res, next) => {
 
 // Start server
 app.listen(PORT, async () => {
-  console.log(`🚀 ZenUA server running on port ${PORT}`);
+  console.log(`🚀 dzenua server running on port ${PORT}`);
   console.log(`📊 Currency rates will be updated every 15 minutes`);
   console.log(`🌐 Open http://localhost:${PORT} to view the app`);
   
