@@ -20,7 +20,7 @@ jobs:
           key: ${{ secrets.REMOTE_KEY }}
           port: 22
           script: |
-            cd /home/rv596484/dzenua.online || exit 1
+            cd /home/rv596484/dzenua.online/www || exit 1
             git pull origin main
             
             cd web-app
