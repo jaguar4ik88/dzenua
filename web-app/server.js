@@ -14,6 +14,7 @@ const { pool, testConnection, initDatabase } = require('./config/database');
 
 const app = express();
 const PORT = process.env.PORT || 8003;
+const HOST = process.env.HOST || '0.0.0.0';
 
 // Middleware
 app.use(helmet({
@@ -371,10 +372,10 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, async () => {
-  console.log(`🚀 dzenua server running on port ${PORT}`);
+app.listen(PORT, HOST, async () => {
+  console.log(`🚀 dzenua server running on ${HOST}:${PORT}`);
   console.log(`📊 Currency rates will be updated every 15 minutes`);
-  console.log(`🌐 Open http://localhost:${PORT} to view the app`);
+  console.log(`🌐 Open http://${HOST}:${PORT} to view the app`);
   
   // Test and initialize database
   const dbConnected = await testConnection();
