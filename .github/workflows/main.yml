@@ -5,47 +5,27 @@ on:
     branches: [ main ]  # или master
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install deps
-        working-directory: web-app
-        run: |
-          npm ci
-          cd client && npm ci
-
-      - name: Build client
-        working-directory: web-app
-        run: npm run build
+      - uses: actions/checkout@v4
 
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.REMOTE_KEY }}   # приватный ssh-ключ
+          key: ${{ secrets.REMOTE_KEY }}
+          port: 22
           script: |
-            cd /var/www/dzenua || mkdir -p /var/www/dzenua && cd /var/www/dzenua
-            # первый раз — клонируем, дальше просто pull
-            if [ ! -d .git ]; then
-              git init
-              git remote add origin https://github.com/jaguar4ik88/dzenua.git
-              git fetch origin main
-              git checkout -t origin/main
-            else
-              git pull origin main
-            fi
+            cd /home/rv596484/dzenua.online/www || exit 1
+            git pull origin main
+
             cd web-app
             npm ci
             cd client && npm ci && cd ..
             npm run build
+
             pm2 restart dzenua || pm2 start server.js --name dzenua
