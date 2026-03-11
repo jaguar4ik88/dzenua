@@ -1,0 +1,39 @@
+name: Deploy dzenua
+
+on:
+  push:
+    branches: [ main ]  # или master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.REMOTE_KEY }}
+          port: 22
+          script: |
+            cd /home/rv596484/dzenua.online/www || exit 1
+
+            # Жёстко обновляем код из GitHub (без конфликтов)
+            git fetch origin main
+            git reset --hard origin/main
+            
+            cd web-app
+            npm ci
+            cd client && npm ci && cd ..
+            npm run build
+            
+            # Запуск Node-сервера без pm2
+            # Останавливаем старый процесс, если есть (разово сам подберёшь PID или используешь pkill):
+            # pkill -f "node server.js" || true
+            
+            # Запускаем новый экземпляр в фоне
+            nohup node server.js > server.log 2>&1 &
