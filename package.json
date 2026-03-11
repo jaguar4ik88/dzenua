@@ -1,46 +1,37 @@
 {
-  "name": "zenua",
+  "name": "dzenua-web-app",
   "version": "1.0.0",
-  "description": "Український аналог zenrus.ru - медитативний фінансовий портал",
-  "main": "index.js",
+  "description": "dzenua - Ukrainian meditation financial portal web application",
+  "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run dev",
-    "build": "npm run build:frontend && npm run build:backend",
-    "build:frontend": "cd frontend && npm run build",
-    "build:backend": "cd backend && npm run build",
-    "start": "cd backend && npm start",
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "clean": "rm -rf node_modules frontend/node_modules backend/node_modules frontend/dist backend/dist",
-    "docker:build": "docker-compose build",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "docker:logs": "docker-compose logs -f"
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "nodemon server.js",
+    "dev:client": "vite --port 3000",
+    "build": "vite build",
+    "start": "node server.js",
+    "install:all": "npm install && cd client && npm install"
   },
-  "keywords": [
-    "ukraine",
-    "currency",
-    "meditation",
-    "media-player",
-    "react",
-    "typescript"
-  ],
-  "author": "dzenua Team",
-  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.15.1",
+    "node-cron": "^3.0.3",
+    "sharp": "^0.33.0"
+  },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.2",
+    "vite": "^5.0.8"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/your-username/zenua.git"
-  },
-  "bugs": {
-    "url": "https://github.com/your-username/zenua/issues"
-  },
-  "homepage": "https://github.com/your-username/zenua#readme"
+    "node": ">=18.0.0"
+  }
 }
