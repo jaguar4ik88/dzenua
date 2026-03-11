@@ -21,11 +21,19 @@ jobs:
           port: 22
           script: |
             cd /home/rv596484/dzenua.online/www || exit 1
-            git pull origin main
+
+            # Жёстко обновляем код из GitHub (без конфликтов)
+            git fetch origin main
+            git reset --hard origin/main
             
             cd web-app
             npm ci
             cd client && npm ci && cd ..
             npm run build
-
-            pm2 restart dzenua || pm2 start server.js --name dzenua
+            
+            # Запуск Node-сервера без pm2
+            # Останавливаем старый процесс, если есть (разово сам подберёшь PID или используешь pkill):
+            # pkill -f "node server.js" || true
+            
+            # Запускаем новый экземпляр в фоне
+            nohup node server.js > server.log 2>&1 &
