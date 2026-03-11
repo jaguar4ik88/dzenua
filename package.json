@@ -7,7 +7,7 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "nodemon server.js",
     "dev:client": "vite --port 3000",
-    "build": "vite build",
+    "build": "NODE_OPTIONS=--no-warnings vite build",
     "start": "node server.js",
     "install:all": "npm install && cd client && npm install"
   },
